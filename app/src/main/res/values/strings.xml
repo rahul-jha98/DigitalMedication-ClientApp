@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ClientApp</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Medications</string>
+    <string name="title_notifications">Reports</string>
+    <string name="title_patient">User</string>
+</resources>
