@@ -72,4 +72,16 @@ class DataRepository(private var mMedicationDao: MedicationDao,
             mMedicationDao.insertMedicines(list)
         }
     }
+
+    fun getMedication(time: Int, currTimeInMillis: Long) : List<MedicineEntry> {
+        return when(time) {
+            in 0..9 -> mMedicationDao.getActiveMorningMedications(currTimeInMillis)
+            in 10..14 -> mMedicationDao.getActiveAfternoonMedications(currTimeInMillis)
+            else -> mMedicationDao.getActiveNightMedications(currTimeInMillis)
+        }
+    }
+
+    fun getOnGoingMedication(currTimeInMillis: Long) : Int {
+        return mMedicationDao.getOngointMedications(currTimeInMillis)
+    }
 }

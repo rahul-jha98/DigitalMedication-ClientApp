@@ -61,7 +61,6 @@ class MedicineAdapter(val context: Context) : RecyclerView.Adapter<MedicineAdapt
         allMedicines.clear()
         for(newMedicine in newMedicines) {
             allMedicines.add(newMedicine)
-            Log.e("Added", newMedicine.name)
         }
 
         notifyDataSetChanged()

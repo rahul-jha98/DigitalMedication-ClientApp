@@ -17,12 +17,15 @@ interface MedicationDao {
     @Query("SELECT * FROM medication ORDER BY endDate")
     fun getAllMedications() : LiveData<List<MedicationWIthMedicines>>
 
-    @Query("SELECT * FROM medicine INNER JOIN (SELECT * FROM medication WHERE medication.endDate > :currTimeInMillis) T ON medicine.medicineId = T.id WHERE breakfast = 1")
-    fun getActiveMorningMedications(currTimeInMillis : Long, durationOfDay: Int) : LiveData<List<MedicineEntry>>
+    @Query("SELECT * FROM medicine INNER JOIN (SELECT * FROM medication WHERE medication.endDate < :currTimeInMillis) T ON medicine.medicineId = T.id WHERE breakfast = 1")
+    fun getActiveMorningMedications(currTimeInMillis : Long) : List<MedicineEntry>
 
-    @Query("SELECT * FROM medicine INNER JOIN (SELECT * FROM medication WHERE medication.endDate > :currTimeInMillis) T ON medicine.medicineId = T.id WHERE lunch = 1")
-    fun getActiveAfternoonMedications(currTimeInMillis : Long, durationOfDay: Int) : LiveData<List<MedicineEntry>>
+    @Query("SELECT * FROM medicine INNER JOIN (SELECT * FROM medication WHERE medication.endDate < :currTimeInMillis) T ON medicine.medicineId = T.id WHERE lunch = 1")
+    fun getActiveAfternoonMedications(currTimeInMillis : Long) : List<MedicineEntry>
 
-    @Query("SELECT * FROM medicine INNER JOIN (SELECT * FROM medication WHERE medication.endDate > :currTimeInMillis) T ON medicine.medicineId = T.id WHERE dinner = 1")
-    fun getActiveNightMedications(currTimeInMillis : Long, durationOfDay: Int) : LiveData<List<MedicineEntry>>
+    @Query("SELECT * FROM medicine INNER JOIN (SELECT * FROM medication WHERE medication.endDate < :currTimeInMillis) T ON medicine.medicineId = T.id WHERE dinner = 1")
+    fun getActiveNightMedications(currTimeInMillis : Long) : List<MedicineEntry>
+
+    @Query("SELECT COUNT(*) FROM medication WHERE endDate > :currTimeInMillis")
+    fun getOngointMedications(currTimeInMillis: Long): Int
 }
