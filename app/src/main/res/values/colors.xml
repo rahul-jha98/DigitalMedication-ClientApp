@@ -16,5 +16,7 @@
     <color name="activeGreen">#00C853</color>
 
     <color name="deepRed">#C62828</color>
-    <color name="lightRed">#EF9A9A</color>
+    <color name="lightRed">#EF9A9A</color>\
+
+    <color name="white">#FFFFFF</color>
 </resources>

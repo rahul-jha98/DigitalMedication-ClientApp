@@ -90,16 +90,16 @@
 
         <com.rahul.clientapp.customuielements.ReselectableSpinner
             android:layout_width="0dp"
-                                                                       android:layout_height="0dp"
-                                                                       android:spinnerMode="dropdown"
-                                                                       android:overlapAnchor="false"
-                                                                       android:dropDownWidth="match_parent"
-                                                                       android:popupElevation="10dp"
-                                                                       android:popupBackground="@color/white"
-                                                                       android:id="@+id/messSpinnerView" app:layout_constraintStart_toStartOf="@+id/messInputLayout"
-                                                                       app:layout_constraintEnd_toEndOf="@+id/messInputLayout"
-                                                                       app:layout_constraintTop_toTopOf="@+id/messInputLayout"
-                                                                       app:layout_constraintBottom_toBottomOf="@+id/messInputLayout" android:visibility="invisible"/>
+               android:layout_height="0dp"
+               android:spinnerMode="dropdown"
+               android:overlapAnchor="false"
+               android:dropDownWidth="match_parent"
+               android:popupElevation="10dp"
+               android:popupBackground="@color/white"
+               android:id="@+id/messSpinnerView" app:layout_constraintStart_toStartOf="@+id/messInputLayout"
+               app:layout_constraintEnd_toEndOf="@+id/messInputLayout"
+               app:layout_constraintTop_toTopOf="@+id/messInputLayout"
+               app:layout_constraintBottom_toBottomOf="@+id/messInputLayout" android:visibility="invisible"/>
 
         <ImageView
                 android:src="@drawable/ic_undraw_personal"
