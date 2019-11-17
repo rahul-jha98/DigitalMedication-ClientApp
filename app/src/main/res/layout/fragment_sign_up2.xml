@@ -40,13 +40,14 @@
                 android:layout_marginEnd="24dp" app:layout_constraintEnd_toEndOf="parent"
                 android:id="@+id/emailInputLayout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:hint="Specialization"
+                android:hint="D.O.B"
                 android:layout_marginTop="16dp" app:layout_constraintTop_toBottomOf="@+id/nameInputLayout">
 
             <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/emailEditText"
+                android:inputType="date"
             />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -75,7 +76,7 @@
                 android:layout_marginEnd="24dp" app:layout_constraintEnd_toEndOf="parent"
                 android:id="@+id/messInputLayout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:hint="Location"
+                android:hint="Sex"
                 android:layout_marginTop="16dp" app:layout_constraintTop_toBottomOf="@+id/phnoInputLayout">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -90,16 +91,16 @@
 
         <com.rahul.clientapp.customuielements.ReselectableSpinner
             android:layout_width="0dp"
-               android:layout_height="0dp"
-               android:spinnerMode="dropdown"
-               android:overlapAnchor="false"
-               android:dropDownWidth="match_parent"
-               android:popupElevation="10dp"
-               android:popupBackground="@color/white"
-               android:id="@+id/messSpinnerView" app:layout_constraintStart_toStartOf="@+id/messInputLayout"
-               app:layout_constraintEnd_toEndOf="@+id/messInputLayout"
-               app:layout_constraintTop_toTopOf="@+id/messInputLayout"
-               app:layout_constraintBottom_toBottomOf="@+id/messInputLayout" android:visibility="invisible"/>
+           android:layout_height="0dp"
+           android:spinnerMode="dropdown"
+           android:overlapAnchor="false"
+           android:dropDownWidth="match_parent"
+           android:popupElevation="10dp"
+           android:popupBackground="@color/white"
+           android:id="@+id/messSpinnerView" app:layout_constraintStart_toStartOf="@+id/messInputLayout"
+           app:layout_constraintEnd_toEndOf="@+id/messInputLayout"
+           app:layout_constraintTop_toTopOf="@+id/messInputLayout"
+           app:layout_constraintBottom_toBottomOf="@+id/messInputLayout" android:visibility="invisible"/>
 
         <ImageView
                 android:src="@drawable/ic_undraw_personal"
@@ -110,6 +111,56 @@
                 android:layout_marginEnd="32dp" android:layout_marginTop="24dp"
                 app:layout_constraintTop_toTopOf="parent" app:layout_constraintDimensionRatio="w,1:2"/>
 
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/messInputLayout">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/heightInputLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="24dp"
+                android:layout_weight="1"
+                android:hint="Height"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/heightEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/weightInputLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="24dp"
+                android:layout_weight="1"
+                android:hint="Weight"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/weightEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
         <Button
                 android:text="Next"
                 android:layout_width="wrap_content"
@@ -117,6 +168,8 @@
                 app:icon="@drawable/ic_next"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
                 android:id="@+id/button" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="24dp"
-                android:layout_marginTop="32dp" app:layout_constraintTop_toBottomOf="@+id/messInputLayout"/>
+                android:layout_marginTop="32dp" app:layout_constraintTop_toBottomOf="@+id/linearLayout"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 </androidx.core.widget.NestedScrollView>

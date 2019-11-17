@@ -28,7 +28,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.ValueEventListener
 import com.rahul.clientapp.MainActivity
 import com.rahul.clientapp.R
-import com.rahul.clientapp.models.Doctor
+import com.rahul.clientapp.models.Client
 
 
 class WelcomeFragment : Fragment(), CoroutineScope {
@@ -67,7 +67,7 @@ class WelcomeFragment : Fragment(), CoroutineScope {
     fun getDetails() {
         if(mAuth.currentUser !=null) {
             Log.v(TAG,"inside getDetails")
-            saveDetails(mAuth.currentUser!!.uid, database.getReference(mAuth.currentUser!!.uid))
+            saveDetails(mAuth.currentUser!!.uid, database.getReference("clients/" + mAuth.currentUser!!.uid))
             showButton()
         }else{
             Log.v(TAG,"inside failed to get details")
@@ -82,7 +82,7 @@ class WelcomeFragment : Fragment(), CoroutineScope {
 
         reference.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-               val doc = dataSnapshot.getValue(Doctor::class.java)
+               val doc = dataSnapshot.getValue(Client::class.java)
 
                 doc?.let { doctor ->
                     saveDetailsOfDoctor(doctor)
@@ -101,16 +101,18 @@ class WelcomeFragment : Fragment(), CoroutineScope {
 
     }
 
-    private fun saveDetailsOfDoctor(doctor: Doctor) {
+    private fun saveDetailsOfDoctor(client: Client) {
         val sharedPref = activity!!.getSharedPreferences(
             getString(R.string.preference_file_key), Context.MODE_PRIVATE)
         with (sharedPref.edit()) {
             putBoolean(getString(R.string.pref_loggedIn), true)
-            putString(getString(R.string.doc_name), doctor.name)
-            putString(getString(R.string.phno), doctor.phoneNo)
-            putString(getString(R.string.doc_id), doctor.docId)
-            putString(getString(R.string.specialization), doctor.specialization)
-            putString(getString(R.string.location), doctor.location)
+            putString(getString(R.string.client_name), client.name)
+            putString(getString(R.string.phno), client.phoneNo)
+            putString(getString(R.string.client_id), client.cleintId)
+            putString(getString(R.string.sex), client.sex)
+            putString(getString(R.string.dob), client.dob)
+            putInt(getString(R.string.weight), client.weight)
+            putInt(getString(R.string.height), client.height)
             putBoolean(getString(R.string.pref_Verified),true)
             commit()
         }
