@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "medication")
 class MedicationEntry (
     @PrimaryKey
-    var id : Int = 0,
+    var id : String = "",
     var doctorName : String = "",
     var diseaseName : String = "",
     var startDate : Long = 0L,

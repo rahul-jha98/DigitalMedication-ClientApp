@@ -9,5 +9,5 @@ class MedicineEntry (
     var breakfast: Int = 0,
     var lunch: Int = 0,
     var dinner: Int = 0,
-    var medicineId : Int = 0
+    var medicineId : String = ""
 )
