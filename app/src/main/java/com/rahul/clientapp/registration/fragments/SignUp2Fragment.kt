@@ -12,13 +12,14 @@ import com.rahul.clientapp.customuielements.ReselectableSpinner
 import com.rahul.clientapp.registration.LoginActivity
 import com.example.clinic.registration.fragments.SignUpHandlerFragment
 import com.rahul.clientapp.R
+import com.rahul.clientapp.registration.LoginActivity.Companion.height
 import kotlinx.android.synthetic.main.fragment_sign_up2.*
 
 
 class SignUp2Fragment : Fragment() , ReselectableSpinner.OnSpinnerCancelledListener {
 
     private var selectedPosition = -1
-    private var allMessList = arrayOf("Allahabad", "Mumbai", "Delhi", "Banglore", "Ahemdebad", "Luckhnow", "Kolkatta", "Chennai")
+    private var allMessList = arrayOf("Male","Female","Others")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,8 +31,6 @@ class SignUp2Fragment : Fragment() , ReselectableSpinner.OnSpinnerCancelledListe
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        emailEditText.setText(LoginActivity.email)
         messEditText.showSoftInputOnFocus = false
         val messAdapter = ArrayAdapter<String>(context!!, R.layout.list_item_spinner_drop_down, allMessList)
         messSpinnerView.adapter = messAdapter
@@ -58,9 +57,10 @@ class SignUp2Fragment : Fragment() , ReselectableSpinner.OnSpinnerCancelledListe
 
         button.setOnClickListener {
             val name = nameEditText.text.toString()
-            val email = emailEditText.text.toString()
-            val mess = messEditText.text.toString()
+            val dob = emailEditText.text.toString()
+            val sex = messEditText.text.toString()
             val phNo:String = phnoEditText.text.toString()
+
 
             if(name.isEmpty()){
                 nameInputLayout.error = "Should not be blank"
@@ -69,24 +69,43 @@ class SignUp2Fragment : Fragment() , ReselectableSpinner.OnSpinnerCancelledListe
                 nameInputLayout.error = null
             }
 
-            if(email.isEmpty()) {
+            if(dob.isEmpty()) {
                 emailInputLayout.error = "Should not be blank"
                 return@setOnClickListener
             } else {
                 emailInputLayout.error = null
             }
 
-            if(mess.isEmpty()) {
+            if(sex.isEmpty()) {
                 messInputLayout.error = "Should not be blank"
                 return@setOnClickListener
             } else {
                 messInputLayout.error = null
             }
 
+            if(heightEditText.text.toString().isEmpty()) {
+                heightInputLayout.error = "Should not be blank"
+                return@setOnClickListener
+            } else {
+                messInputLayout.error = null
+            }
+
+            if(weightEditText.text.toString().isEmpty()) {
+                weightInputLayout.error = "Should not be blank"
+                return@setOnClickListener
+            } else {
+                messInputLayout.error = null
+            }
+
+            val height: Int = Integer.parseInt(heightEditText.text.toString())
+            val weight: Int = Integer.parseInt(weightEditText.text.toString())
+
             LoginActivity.name = name
-            LoginActivity.location = mess
-            LoginActivity.specialization = email
+            LoginActivity.dob = dob
+            LoginActivity.sex = sex
             LoginActivity.phNo = phNo
+            LoginActivity.height = height
+            LoginActivity.weight = weight
 
             SignUpHandlerFragment.viewPager.currentItem = 2
         }

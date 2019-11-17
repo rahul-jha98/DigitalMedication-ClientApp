@@ -16,4 +16,10 @@
     <string name="location">location</string>
     <string name="phno">phno</string>
     <string name="email">email</string>
+    <string name="client_name">client name</string>
+    <string name="client_id">client id</string>
+    <string name="sex">sex</string>
+    <string name="dob">date of birth</string>
+    <string name="weight">weight</string>
+    <string name="height">height</string>
 </resources>

@@ -17,7 +17,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.rahul.clientapp.R
-import com.rahul.clientapp.models.Doctor
+import com.rahul.clientapp.models.Client
 import com.rahul.clientapp.registration.fragments.listeners.LoginInterfaceListener
 import kotlinx.android.synthetic.main.fragment_sign_up_handler.*
 import kotlinx.coroutines.CoroutineScope
@@ -109,7 +109,7 @@ class SignUpHandlerFragment : Fragment(), CoroutineScope {
             if (!task.isSuccessful) {
                 Log.e(TAG, "registration failed")
             }else{
-                saveValuesToDatabase(database.getReference(mAuth.currentUser!!.uid))
+                saveValuesToDatabase(database.getReference("clients/"+mAuth.currentUser!!.uid))
                 SigningUpFragment.showDone()
                 Handler().postDelayed(Runnable {
                     loginInterfaceListener.switchToFragment(3)
@@ -121,6 +121,6 @@ class SignUpHandlerFragment : Fragment(), CoroutineScope {
 
     private fun saveValuesToDatabase(reference: DatabaseReference){
         Log.d(TAG, "Trying to push value")
-        reference.setValue(Doctor(mAuth.currentUser!!.uid, LoginActivity.name, LoginActivity.specialization, LoginActivity.phNo, LoginActivity.location))
+        reference.setValue(Client(mAuth.currentUser!!.uid, LoginActivity.name, LoginActivity.dob,LoginActivity.phNo, LoginActivity.sex, LoginActivity.height, LoginActivity.weight))
     }
 }

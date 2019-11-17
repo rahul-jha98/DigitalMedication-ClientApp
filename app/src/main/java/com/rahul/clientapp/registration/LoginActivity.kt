@@ -14,13 +14,15 @@ class LoginActivity : AppCompatActivity(), LoginInterfaceListener {
 
     companion object {
 
-        var docId: String = ""
-        var name: String = ""
+        var clientId: String = ""
         var password: String = ""
-        var specialization: String = ""
-        var location: String = ""
+        var name: String = ""
+        var dob: String = ""
+        var sex: String = ""
         var phNo: String = ""
         var email: String = ""
+        var height: Int = 0
+        var weight: Int = 0
     }
 
     private val TAG = LoginActivity::class.java.simpleName
