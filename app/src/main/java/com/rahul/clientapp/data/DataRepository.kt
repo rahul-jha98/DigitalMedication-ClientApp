@@ -1,5 +1,6 @@
 package com.rahul.clientapp.data
 
+import android.database.sqlite.SQLiteConstraintException
 import android.util.Log
 import androidx.lifecycle.LiveData
 import com.rahul.clientapp.AppExecutors
@@ -35,41 +36,51 @@ class DataRepository(private var mMedicationDao: MedicationDao,
         }
     }
 
-    fun init() {
-        addMedication(Medication("Dr. Anant Rai", "Cancer", 300, 400, listOf(
-            Medicine("Crocin", "1 pill", 1, 0, 1),
-            Medicine("Vicks", "1", 0, 1, 1)
-        )), 1)
-
-        addMedication(Medication("Dr. Dhruv Agarwal", "Cancer", 300, 400, listOf(
-            Medicine("Crocin", "1 pill", 1, 0, 1),
-            Medicine("Vicks", "1", 0, 1, 1)
-        )), 2)
-
-        addMedication(Medication("Dr. Rahul Jha", "Cancer", 300, 400, listOf(
-            Medicine("Crocin", "1 pill", 1, 0, 1),
-            Medicine("Vicks", "1", 0, 1, 1),
-            Medicine("Apple", "1", 1, 0, 0)
-        )), 3)
-    }
+//    fun init() {
+//        addMedication(Medication("Dr. Anant Rai", "Cancer", 300, 400, listOf(
+//            Medicine("Crocin", "1 pill", 1, 0, 1),
+//            Medicine("Vicks", "1", 0, 1, 1)
+//        )), 1)
+//
+//        addMedication(Medication("Dr. Dhruv Agarwal", "Cancer", 300, 400, listOf(
+//            Medicine("Crocin", "1 pill", 1, 0, 1),
+//            Medicine("Vicks", "1", 0, 1, 1)
+//        )), 2)
+//
+//        addMedication(Medication("Dr. Rahul Jha", "Cancer", 300, 400, listOf(
+//            Medicine("Crocin", "1 pill", 1, 0, 1),
+//            Medicine("Vicks", "1", 0, 1, 1),
+//            Medicine("Apple", "1", 1, 0, 0)
+//        )), 3)
+//    }
 
     fun getAllMedications() : LiveData<List<MedicationWIthMedicines>> {
         return mMedicationDao.getAllMedications()
     }
 
     @Synchronized
-    fun addMedication(medication : Medication, id: Int) {
+    fun addMedication(medication : Medication, id: String) {
         mExecutors.diskIO().execute{
             var mediationEntry = MedicationEntry(id, medication.doctorName, medication.diseaseName,
-                                                    medication.startDate, medication.endDate)
+                medication.startDate, medication.endDate)
 
             val list = ArrayList<MedicineEntry>()
 
             for(medicine in medication.medicines)
                 list.add(MedicineEntry(medicine.name, medicine.quantity, medicine.breakfast, medicine.lunch, medicine.dinner, id))
 
-            mMedicationDao.insertMedication(mediationEntry)
-            mMedicationDao.insertMedicines(list)
+            try {
+                mMedicationDao.insertMedication(mediationEntry)
+            }catch (e : SQLiteConstraintException) {
+                Log.d("Repository", "Error in insertion")
+                return@execute
+            }
+            try {
+                mMedicationDao.insertMedicines(list)
+            }catch (e : SQLiteConstraintException) {
+                Log.d("Repository", "Error in insertion")
+                return@execute
+            }
         }
     }
 

@@ -17,9 +17,16 @@ class ReminderService(val context: Context, val params : WorkerParameters) : Wor
         // currentTime will hold the current time in milliseconds
         //millisecondsUntilMidnight will hold milliseconds for midnight
         val MILLIS_IN_DAY: Long = 86400000
-        val currentTime = System.currentTimeMillis()
-        val millisTillNow = currentTime % MILLIS_IN_DAY
-        val millisecondsForMidnight = currentTime - millisTillNow
+        val currentInstance = Calendar.getInstance()
+        val currentTime = currentInstance.timeInMillis
+
+        currentInstance.set(Calendar.HOUR_OF_DAY, 0)
+        currentInstance.set(Calendar.MINUTE, 0)
+        currentInstance.set(Calendar.SECOND, 0)
+        currentInstance.set(Calendar.MILLISECOND, 0)
+
+        val millisecondsForMidnight = currentInstance.timeInMillis
+
 
         val MILLIS_IN_HOUR = MILLIS_IN_DAY / 24
 

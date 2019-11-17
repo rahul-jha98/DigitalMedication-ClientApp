@@ -11,7 +11,7 @@ interface MedicationDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertMedication(medicationEntry: MedicationEntry)
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertMedicines(medicineEntry: List<MedicineEntry>)
 
     @Query("SELECT * FROM medication ORDER BY endDate")
