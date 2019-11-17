@@ -10,10 +10,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.rahul.clientapp.R
-import com.rahul.clientapp.data.database.MedicationEntry
 import com.rahul.clientapp.data.database.MedicationWIthMedicines
-import com.rahul.clientapp.models.Medication
-import org.w3c.dom.Text
+import com.rahul.clientapp.utils.TimeUtils
 
 
 class MedicationAdapter(val context: Context, val recyclerView: RecyclerView)   : RecyclerView.Adapter<MedicationAdapter.MedicationViewHolder>() {
@@ -43,15 +41,19 @@ class MedicationAdapter(val context: Context, val recyclerView: RecyclerView)   
             diseaseTextView.text = medication.medication.diseaseName
 
             val isExpanded = position == selectedPosition
-            when (position) {
-                0 -> activeTextView.visibility = View.VISIBLE
-                else -> activeTextView.visibility = View.INVISIBLE
-            }
+
+            if(medication.medication.endDate > TimeUtils.getTodaysMidninghtTimeInMillis())
+                activeTextView.visibility = View.VISIBLE
+            else
+                activeTextView.visibility = View.INVISIBLE
+
             medicinesRecyclerView.visibility = if(isExpanded) View.VISIBLE else View.GONE
             itemView.isActivated = isExpanded
 
-            fromTextView.text = medication.medication.startDate.toString()
-            endTextView.text = "${medication.medication.endDate} days"
+            fromTextView.text = TimeUtils.getDateString(medication.medication.startDate)
+
+            val noOfDays = (medication.medication.endDate - medication.medication.startDate)/86400000
+            endTextView.text = "$noOfDays days"
 
             val medicineAdapter = MedicineAdapter(context)
             medicinesRecyclerView.apply {
