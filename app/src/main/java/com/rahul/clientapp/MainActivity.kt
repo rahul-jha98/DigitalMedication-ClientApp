@@ -13,6 +13,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.work.*
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -35,8 +36,7 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment)
         navView.setupWithNavController(navController)
 
-        FirebaseDatabase.getInstance().getReference("data").setValue("Hello")
-        FirebaseDatabase.getInstance().getReference("/medications/dhruv/").addChildEventListener(object :ChildEventListener {
+        FirebaseDatabase.getInstance().getReference("/medications/" + FirebaseAuth.getInstance().uid!!).addChildEventListener(object :ChildEventListener {
             override fun onCancelled(p0: DatabaseError) {
 
             }

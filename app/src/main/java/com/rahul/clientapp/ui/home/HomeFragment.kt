@@ -22,6 +22,7 @@ import com.rahul.clientapp.R
 import com.rahul.clientapp.SearchDoctorActivity
 import com.rahul.clientapp.adapters.MedicationAdapter
 import kotlinx.android.synthetic.main.fragment_home.*
+import java.util.*
 
 class HomeFragment : Fragment() {
 
@@ -48,6 +49,15 @@ class HomeFragment : Fragment() {
 
         nameTextView.text = sharedPref.getString(getString(R.string.client_name), "No Name")
 
+        val hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
+
+        val timeString = when(hour){
+            in 0..9-> "Good Morning, have a healthy and nice day"
+            in 9..16-> "Good Afternoon, lookout for those heat strokes"
+            in 16..20 -> "Good Evening, How was you day?"
+            else -> "Sleeping early has proven to benefit a lot. Good Night"
+        }
+
         val medicationAdapter = MedicationAdapter(context!!, medicationsRecyclerView)
 
         medicationsRecyclerView.apply {
@@ -66,7 +76,7 @@ class HomeFragment : Fragment() {
                 Handler().postDelayed({
                     if(greetingsTextView != null)
                         greetingsTextView.text = "Here's the list of your medications"
-                }, 2000L)
+                }, 3000L)
 
                 medicationsRecyclerView.visibility = View.VISIBLE
                 medicationAdapter.swapList(medicationList)
