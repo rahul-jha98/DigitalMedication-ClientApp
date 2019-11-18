@@ -8,13 +8,13 @@ import androidx.room.Query
 
 @Dao
 interface MedicationDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertMedication(medicationEntry: MedicationEntry)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertMedicines(medicineEntry: List<MedicineEntry>)
 
-    @Query("SELECT * FROM medication ORDER BY endDate")
+    @Query("SELECT * FROM medication ORDER BY endDate DESC")
     fun getAllMedications() : LiveData<List<MedicationWIthMedicines>>
 
     @Query("SELECT * FROM medicine INNER JOIN (SELECT * FROM medication WHERE medication.endDate < :currTimeInMillis) T ON medicine.medicineId = T.id WHERE breakfast = 1")
@@ -26,6 +26,6 @@ interface MedicationDao {
     @Query("SELECT * FROM medicine INNER JOIN (SELECT * FROM medication WHERE medication.endDate < :currTimeInMillis) T ON medicine.medicineId = T.id WHERE dinner = 1")
     fun getActiveNightMedications(currTimeInMillis : Long) : List<MedicineEntry>
 
-    @Query("SELECT COUNT(*) FROM medication WHERE endDate > :currTimeInMillis")
-    fun getOngointMedications(currTimeInMillis: Long): Int
+    @Query("SELECT * FROM medication WHERE endDate > :currTimeInMillis")
+    fun getActiveMedications(currTimeInMillis: Long): LiveData<List<MedicationWIthMedicines>>
 }

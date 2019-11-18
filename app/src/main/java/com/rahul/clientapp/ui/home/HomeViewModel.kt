@@ -3,11 +3,9 @@ package com.rahul.clientapp.ui.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.rahul.clientapp.data.DataRepository
+import com.rahul.clientapp.utils.TimeUtils
 
-class HomeViewModel : ViewModel() {
-
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
-    }
-    val text: LiveData<String> = _text
+class HomeViewModel(repository: DataRepository) : ViewModel() {
+    val medicationList = repository.getActiveMedication(TimeUtils.getTodaysMidninghtTimeInMillis())
 }

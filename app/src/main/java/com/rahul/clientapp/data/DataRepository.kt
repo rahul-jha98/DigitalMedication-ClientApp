@@ -92,7 +92,7 @@ class DataRepository(private var mMedicationDao: MedicationDao,
         }
     }
 
-    fun getOnGoingMedication(currTimeInMillis: Long) : Int {
-        return mMedicationDao.getOngointMedications(currTimeInMillis)
+    fun getActiveMedication(currTimeInMillis: Long) : LiveData<List<MedicationWIthMedicines>> {
+        return mMedicationDao.getActiveMedications(currTimeInMillis)
     }
 }

@@ -60,6 +60,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "980350990749-mp351boi4v67i0j69vaefrc8nh6n651g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rahul.clientapp",
+            "certificate_hash": "d1324d80a5bb9d8a32590cd7cf5468e8c998d9f5"
+          }
+        },
+        {
           "client_id": "980350990749-7p6p7ce2qehk2sk6oguhi0uep5g4qrpo.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
