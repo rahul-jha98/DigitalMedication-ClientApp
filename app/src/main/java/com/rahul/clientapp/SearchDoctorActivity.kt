@@ -1,5 +1,6 @@
 package com.rahul.clientapp
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,8 +21,11 @@ class SearchDoctorActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search_doctor)
+        var sharedPreferences = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE)
         viewManager = LinearLayoutManager(this)
-        viewAdapter = DoctorAdapter()
+        var clientId: String = sharedPreferences.getString(getString(R.string.client_id),"").toString()
+        var clientName: String = sharedPreferences.getString(getString(R.string.client_name),"").toString()
+        viewAdapter = DoctorAdapter(clientId, clientName, this)
 
         recyclerView.apply {
             setHasFixedSize(true)
