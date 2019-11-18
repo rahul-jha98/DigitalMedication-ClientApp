@@ -1,6 +1,10 @@
 package com.rahul.clientapp.ui.home
 
 import android.content.Context
+import android.content.Intent
+import com.rahul.clientapp.viewmodels.RoomViewModelFactory
+
+
 import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
@@ -13,8 +17,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.rahul.clientapp.ClinetApplication
 import com.rahul.clientapp.R
+import com.rahul.clientapp.SearchDoctorActivity
 import com.rahul.clientapp.adapters.MedicationAdapter
-import com.rahul.clientapp.viewmodels.RoomViewModelFactory
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
@@ -61,5 +65,10 @@ class HomeFragment : Fragment() {
                 medicationAdapter.swapList(medicationList)
             }
         })
+
+        cardView.setOnClickListener {
+            var intent: Intent = Intent(activity, SearchDoctorActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
