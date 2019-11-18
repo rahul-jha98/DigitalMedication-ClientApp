@@ -8,6 +8,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.rahul.clientapp.R
 import com.rahul.clientapp.models.Report
+import androidx.core.content.ContextCompat.startActivity
+import android.content.Intent
+import android.net.Uri
+
 
 class ReportAdapter(val context: Context)   : RecyclerView.Adapter<ReportAdapter.ReportViewHolder>(){
     val items = ArrayList<Report>()
@@ -34,7 +38,15 @@ class ReportAdapter(val context: Context)   : RecyclerView.Adapter<ReportAdapter
 
             itemView.setOnClickListener {
                 //open link to url
+                val i = Intent(Intent.ACTION_VIEW)
+                i.data = Uri.parse(report.iamgeUrl)
+                context.startActivity(i)
             }
         }
+    }
+
+    fun addItem(report : Report) {
+        items.add(report)
+        notifyItemInserted(items.size - 1)
     }
 }

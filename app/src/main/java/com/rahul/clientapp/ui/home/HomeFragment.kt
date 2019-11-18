@@ -48,6 +48,8 @@ class HomeFragment : Fragment() {
             HomeViewModel::class.java)
         viewModel.medicationList.observe(this, Observer { list ->
             list?.let { medicationList ->
+                if(medicationList.isEmpty())
+                    return@Observer
                 relaxImageView.visibility = View.GONE
                 relaxTextView.visibility = View.GONE
                 Handler().postDelayed({
