@@ -35,7 +35,6 @@ class SearchDoctorActivity : AppCompatActivity() {
 
         FirebaseDatabase.getInstance().getReference("/doctor/").addChildEventListener(object: ChildEventListener{
             override fun onChildRemoved(p0: DataSnapshot) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
 
             override fun onChildAdded(p0: DataSnapshot, p1: String?) {
@@ -45,15 +44,12 @@ class SearchDoctorActivity : AppCompatActivity() {
             }
 
             override fun onChildChanged(p0: DataSnapshot, p1: String?) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
 
             override fun onChildMoved(p0: DataSnapshot, p1: String?) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
 
             override fun onCancelled(p0: DatabaseError) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
 
         })

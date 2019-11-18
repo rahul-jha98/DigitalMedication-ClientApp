@@ -3,7 +3,6 @@ package com.rahul.clientapp.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
@@ -11,12 +10,9 @@ import com.google.firebase.database.FirebaseDatabase
 import com.rahul.clientapp.R
 import com.rahul.clientapp.models.Appointment
 import com.rahul.clientapp.models.Doctor
-import org.w3c.dom.Text
 import android.content.DialogInterface
-import android.app.AlertDialog
 import android.content.Context
-import android.view.ContextThemeWrapper
-import androidx.appcompat.content.res.AppCompatResources.getDrawable
+import androidx.appcompat.app.AlertDialog
 
 
 class DoctorAdapter(var clientId: String, var clientName: String, var context: Context):
@@ -33,13 +29,11 @@ class DoctorAdapter(var clientId: String, var clientName: String, var context: C
 
 
     class MyViewHolder(val view: View): RecyclerView.ViewHolder(view){
-        var docId: TextView = view.findViewById(R.id.textId)
         var docName: TextView = view.findViewById(R.id.textName)
         var docSpecialization: TextView = view.findViewById(R.id.textSpecialization)
-        var docLocation: TextView = view.findViewById(com.rahul.clientapp.R.id.textLocation)
+        var docLocation: TextView = view.findViewById(R.id.textLocation)
 
         fun bind(doc: Doctor, firebaseDatabase: FirebaseDatabase, appointment: Appointment, context: Context){
-            docId.text = doc.docId
             docName.text = doc.name
             docSpecialization.text = doc.specialization
             docLocation.text = doc.location
@@ -57,7 +51,7 @@ class DoctorAdapter(var clientId: String, var clientName: String, var context: C
                 }
             (view as CardView).setOnClickListener {
                 val builder = AlertDialog.Builder(context)
-                builder.setMessage("Are you sure?").setPositiveButton("Yes", dialogClickListener)
+                builder.setMessage("Are you sure you want to book an appointment?").setPositiveButton("Yes", dialogClickListener)
                     .setNegativeButton("No", dialogClickListener).show().getButton(DialogInterface.BUTTON_POSITIVE)
             }
         }
