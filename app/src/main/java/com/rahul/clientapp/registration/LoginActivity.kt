@@ -2,8 +2,10 @@ package com.rahul.clientapp.registration
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import com.example.clinic.registration.fragments.*
+import com.google.firebase.auth.FirebaseAuth
 import com.rahul.clientapp.R
 import com.rahul.clientapp.registration.fragments.LoginFragment
 import com.rahul.clientapp.registration.fragments.RollNoFragment
@@ -40,6 +42,11 @@ class LoginActivity : AppCompatActivity(), LoginInterfaceListener {
             }
         }
         supportFragmentManager.beginTransaction().replace(R.id.loginContentView, fragment!!).commit()
+
+        FirebaseAuth.getInstance().addAuthStateListener {
+            if(it.currentUser != null)
+                Log.d("Firebase", "Users is successfully logged in")
+        }
 
     }
 

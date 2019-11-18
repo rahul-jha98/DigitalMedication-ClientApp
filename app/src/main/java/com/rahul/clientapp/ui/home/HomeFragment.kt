@@ -15,7 +15,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
 import com.rahul.clientapp.ClinetApplication
+import com.rahul.clientapp.PredictionActivity
 import com.rahul.clientapp.R
 import com.rahul.clientapp.SearchDoctorActivity
 import com.rahul.clientapp.adapters.MedicationAdapter
@@ -40,6 +42,11 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val sharedPref = activity!!.getSharedPreferences(
+            getString(R.string.preference_file_key), Context.MODE_PRIVATE)
+
+        nameTextView.text = sharedPref.getString(getString(R.string.client_name), "No Name")
 
         val medicationAdapter = MedicationAdapter(context!!, medicationsRecyclerView)
 
@@ -66,7 +73,17 @@ class HomeFragment : Fragment() {
             }
         })
 
-        cardView.setOnClickListener {
+        cardViewAI.setOnClickListener {
+            var intent: Intent = Intent(activity, PredictionActivity::class.java)
+            startActivity(intent)
+        }
+
+        applyButton.setOnClickListener{
+            var intent: Intent = Intent(activity, SearchDoctorActivity::class.java)
+            startActivity(intent)
+        }
+
+        cardView.setOnClickListener{
             var intent: Intent = Intent(activity, SearchDoctorActivity::class.java)
             startActivity(intent)
         }

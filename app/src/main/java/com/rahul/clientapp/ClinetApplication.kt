@@ -1,6 +1,7 @@
 package com.rahul.clientapp
 
 import android.app.Application
+import com.androidnetworking.AndroidNetworking
 import com.rahul.clientapp.di.components.ApplicationComponent
 import com.rahul.clientapp.di.modules.ContextModule
 import com.rahul.clientapp.di.modules.RoomModule
@@ -12,7 +13,7 @@ class ClinetApplication: Application() {
 
     override fun onCreate() {
         super.onCreate()
-
+        AndroidNetworking.initialize(applicationContext);
         applicationComponent = DaggerApplicationComponent.builder()
             .contextModule(ContextModule(this))
             .roomModule(RoomModule)
