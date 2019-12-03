@@ -2,6 +2,7 @@ package com.rahul.clientapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.renderscript.RenderScript
 import android.transition.TransitionManager
 import android.util.Log
 import android.view.LayoutInflater
@@ -81,8 +82,8 @@ class PredictionActivity : AppCompatActivity() {
             endProgressBar.visibility = View.VISIBLE
             getButton.visibility = View.GONE
 
-            AndroidNetworking.post("https://deb37f4c.ngrok.io/api").addJSONObjectBody(JSONObject(corresponding as Map<String, Int>)).setPriority(
-                Priority.MEDIUM)
+            AndroidNetworking.post("https://b835965d.ngrok.io/api").addJSONObjectBody(JSONObject(corresponding as Map<String, Int>)).setPriority(
+                RenderScript.Priority.MEDIUM)
                 .build().getAsJSONArray(object: JSONArrayRequestListener {
                     override fun onResponse(response: JSONArray?) {
                         response?.let{
